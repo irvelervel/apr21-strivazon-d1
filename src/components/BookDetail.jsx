@@ -1,8 +1,22 @@
 import { Component } from "react";
 import { Col, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { connect } from 'react-redux'
+
+const mapStateToProps = (state) => state
+
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (book) => dispatch(
+    { type: 'ADD_TO_CART', payload: book }
+  )
+})
 
 class BookDetail extends Component {
+
+  // here we can expect to have
+  // this.props.cart
+  // this.props.user
+  // this.props.addToCart
   state = {
     book: null,
   };
@@ -44,7 +58,7 @@ class BookDetail extends Component {
                   <span className="font-weight-bold">Price:</span>
                   {this.state.book.price}
                 </p>
-                <Button color="primary" onClick={() => {}}>
+                <Button color="primary" onClick={() => this.props.addToCart(this.state.book)}>
                   ADD TO CART
                 </Button>
               </Col>
@@ -62,4 +76,7 @@ class BookDetail extends Component {
   }
 }
 
-export default BookDetail;
+export default connect(mapStateToProps, mapDispatchToProps)(BookDetail);
+
+// how can we interact with the redux store from a component?
+// CONNECTING IT!

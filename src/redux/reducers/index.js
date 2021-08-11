@@ -21,11 +21,13 @@ const mainReducer = (state = initialState, action) => {
           // the book to add is going to be the payload of the action
           // action.payload -> the book to add
           products: [...state.cart.products, action.payload],
+          // products: state.cart.products.concat(action.payload)
           // FORBIDDEN METHODS!!
           // push, pop, splice
         },
       }
     default:
+      //   console.log('NOT RECOGNIZED ACTION!')
       return state
   }
 }
