@@ -26,6 +26,17 @@ const mainReducer = (state = initialState, action) => {
           // push, pop, splice
         },
       }
+
+    case 'REMOVE_FROM_CART':
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          // the payload in this action will be the index of the book to remove
+          products: state.cart.products.filter((b, i) => i !== action.payload),
+        },
+      }
+
     default:
       //   console.log('NOT RECOGNIZED ACTION!')
       return state
